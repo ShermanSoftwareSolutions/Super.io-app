@@ -31,7 +31,11 @@ angular.module('superio', [
     apiUrl: 'http://localhost:1337'
   })
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $authProvider, settings) {
+
+    $authProvider.baseUrl = settings.apiUrl;
+    $authProvider.loginUrl = '/user/login';
+    $authProvider.signupUrl = '/user/signup';
 
     $stateProvider
 
@@ -44,22 +48,22 @@ angular.module('superio', [
 
       // Each tab has its own nav history stack:
 
-      //.state('tab.dash', {
-      //  url: '/dash',
-      //  views: {
-      //    'tab-dash': {
-      //      templateUrl: 'templates/tab-dash.html',
-      //      controller: 'DashCtrl'
-      //    }
-      //  },
-      //  resolve: {
-      //    authenticated: ['$location', '$auth', function ($location, $auth) {
-      //      if (!$auth.isAuthenticated()) {
-      //        return $location.path('/login');
-      //      }
-      //    }]
-      //  }
-      //})
+      .state('tab.dash', {
+        url: '/dash',
+        views: {
+          'tab-dash': {
+            templateUrl: 'templates/tab-dash.html',
+            controller: 'DashCtrl'
+          }
+        },
+        resolve: {
+          authenticated: ['$location', '$auth', function ($location, $auth) {
+            if (!$auth.isAuthenticated()) {
+              return $location.path('/login');
+            }
+          }]
+        }
+      })
 
       .state('login', {
         url: '/login',
