@@ -11,7 +11,7 @@ angular.module('superio')
         product.amount = product.amount - 1;
 
       if (product.amount <= 0)
-        $scope.list.lines.splice($scope.lists.indexOf(product), 1);
+        $scope.list.lines.splice($scope.list.lines.indexOf(product), 1);
 
       var list = {
         shoppinglistId: $scope.list.id,
@@ -45,8 +45,6 @@ angular.module('superio')
     ShoppinglistService
       .find($stateParams.id)
       .success(function (res) {
-        console.log(res);
-        $scope.list = [];
         $scope.list = res;
         $scope.calculateTotalPrice();
       })

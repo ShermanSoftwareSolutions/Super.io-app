@@ -69,8 +69,22 @@ angular.module('superio', [
               return $location.path('/login');
             }
           }]
-        }
+        },
+        cache: false
       })
+
+      .state('new-product', {
+        url: '/new-product/:shoppinglistId',
+        templateUrl: 'templates/new-product.html',
+        controller: 'NewProductCtrl',
+        resolve: {
+          authenticated: ['$location', '$auth', function ($location, $auth) {
+            if (!$auth.isAuthenticated()) {
+              return $location.path('/login');
+            }
+          }]
+        }
+      });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/shoppinglist');
