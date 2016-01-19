@@ -4,12 +4,15 @@ angular.module('superio')
 
     $scope.list = [];
 
-    $scope.changeAmount = function (product, increment) {
+    $scope.changeAmount = function (product, index, increment) {
       if (increment)
         product.amount = product.amount + 1;
       else
         product.amount = product.amount - 1;
-      
+
+      if (product.amount <= 0)
+        $scope.list.lines.splice($scope.lists.indexOf(product), 1);
+
       var list = {
         shoppinglistId: $scope.list.id,
         productId: product.productId,
@@ -19,13 +22,24 @@ angular.module('superio')
       ShoppinglistService
         .changeAmount(list)
         .success(function (res) {
-          console.log('worked');
-          console.log(res);
+          console.log('Changed the product amount');
         })
         .error(function (err) {
-          console.log(err);
           console.log('Changing amount went wrong');
         })
+    };
+
+    $scope.$watch('list', function () {
+      $scope.calculateTotalPrice();
+    }, true);
+
+    $scope.calculateTotalPrice = function () {
+      $scope.list.totalPrice = 0;
+      if ($scope.list.lines != [] && $scope.list.lines != undefined) {
+        $scope.list.lines.map(function (item) {
+          $scope.list.totalPrice += item.product.price * item.amount;
+        });
+      }
     };
 
     ShoppinglistService
@@ -34,8 +48,7 @@ angular.module('superio')
         console.log(res);
         $scope.list = [];
         $scope.list = res;
-
-        $scope.list.totalPrice = 4;
+        $scope.calculateTotalPrice();
       })
       .error(function (err) {
         console.log(err);

@@ -4,10 +4,10 @@
       <li ng-repeat="line in list.lines" class="item item-button-right">
         {{line.product.title}} <span class="text-muted">{{line.product.price * line.amount | currency: '€ '}}</span>
 
-        <div class="button button-positive" ng-click="changeAmount(line, true)">
+        <div class="button button-positive" ng-click="changeAmount(line, $id, true)">
           <i class="icon ion-plus"></i>
         </div>
-        <div class="button button-positive" ng-click="changeAmount(line, false)" style="margin-right: 45px;">
+        <div class="button button-positive" ng-click="changeAmount(line, $id, false)" style="margin-right: 45px;">
           <i ng-if="line.amount > 1" class="icon ion-minus"></i>
           <i ng-if="line.amount <= 1" class="icon ion-trash-a"></i>
         </div>
@@ -24,5 +24,5 @@
   &nbsp;&nbsp;&nbsp;
   <button class="button button-positive button-small">Nieuw product</button>
   &nbsp;&nbsp;&nbsp;
-  <button class="button button-positive button-small">Afrekenen</button>
+  <button class="button button-positive button-small">Winkelen</button>
 </ion-tabs>
