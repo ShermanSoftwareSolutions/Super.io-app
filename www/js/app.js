@@ -59,6 +59,19 @@ angular.module('superio', [
         }
       })
 
+      .state('shoppinglist-detail', {
+        url: '/shoppinglist/:id',
+        templateUrl: 'templates/shoppinglist-detail.html',
+        controller: 'ShoppinglistDetailCtrl',
+        resolve: {
+          authenticated: ['$location', '$auth', function ($location, $auth) {
+            if (!$auth.isAuthenticated()) {
+              return $location.path('/login');
+            }
+          }]
+        }
+      })
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/shoppinglist');
 

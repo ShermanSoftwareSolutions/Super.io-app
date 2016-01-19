@@ -10,4 +10,12 @@ angular.module('superio')
     this.delete = function (id) {
       return $http.delete(settings.apiUrl + baseEndpoint + '/' + id);
     };
+
+    this.find = function (id) {
+      return $http.get(settings.apiUrl + baseEndpoint + '/' + id);
+    };
+
+    this.changeAmount = function (list) {
+      return $http.put(settings.apiUrl + baseEndpoint + '/amount/' + list.shoppinglistId + '/' + list.productId, list);
+    };
   });

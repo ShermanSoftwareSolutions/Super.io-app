@@ -23,6 +23,11 @@ input.ng-invalid {
   color: #333;
 }
 
-.button-new {
-  font-size: 14px;
+.total-price {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.tabs .bigger-tabs {
+  height: 100px !important;
 }

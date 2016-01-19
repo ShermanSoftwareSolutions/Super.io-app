@@ -4,8 +4,8 @@ angular.module('superio')
 
     $scope.lists = [];
 
-    $scope.onItemDelete = function(item) {
-        var id = item.id;
+    $scope.onItemDelete = function (item) {
+      var id = item.id;
 
       ShoppinglistService
         .delete(id)
