@@ -3,10 +3,25 @@
  */
 angular.module('superio')
 
-  .controller('ShoppinglistDetailCtrl', function ($scope, ShoppinglistService, $stateParams) {
+  .controller('ShoppinglistDetailCtrl', function ($scope, ShoppinglistService, $stateParams, $cordovaBarcodeScanner) {
     $scope.list = [];
+    $scope.scannedInfo = '';
 
-    /**
+    $scope.testScanner = function () {
+      document.addEventListener("deviceready", function () {
+
+        $cordovaBarcodeScanner
+          .scan()
+          .then(function (barcodeData) {
+            $scope.scannedInfo = barcodeData.text;
+          }, function (error) {
+            // An error occurred
+          });
+
+      })
+    }
+
+      /**
      * Changes the amount that a product has in a shoppinglist
      *
      * @param product

@@ -33,7 +33,7 @@ angular.module('superio')
         .catch(function () {
           // Show a toast error message
           $cordovaToast
-            .show('Verkeerde inloggegevens', 'long', 'bottom')
+            .showLongBottom('Verkeerde inloggegevens')
             .then(function () {
               console.log('Toast launched!');
             }, function (err) {

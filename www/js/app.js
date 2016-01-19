@@ -25,7 +25,7 @@ angular.module('superio', [
 
   .constant('settings', {
     // The url of the Sails backend
-    apiUrl: 'http://localhost:1337'
+    apiUrl: 'http://192.168.2.6:1337'
   })
 
   .config(function ($stateProvider, $urlRouterProvider, $authProvider, settings, $ionicConfigProvider) {
