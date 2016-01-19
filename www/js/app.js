@@ -1,10 +1,6 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
+/**
+ * Starting point of the Super.io app
+ */
 angular.module('superio', [
   'ionic',
   'satellizer',
@@ -28,17 +24,20 @@ angular.module('superio', [
   })
 
   .constant('settings', {
+    // The url of the Sails backend
     apiUrl: 'http://localhost:1337'
   })
 
   .config(function ($stateProvider, $urlRouterProvider, $authProvider, settings, $ionicConfigProvider) {
-
+    // Configuration for the Satellizer plugin
     $authProvider.baseUrl = settings.apiUrl;
     $authProvider.loginUrl = '/user/login';
     $authProvider.signupUrl = '/user/signup';
 
+    // Align the tabs to the bottom (Top on iOS)
     $ionicConfigProvider.tabs.position('bottom');
 
+    // Configurate all the states (routing)
     $stateProvider
       .state('login', {
         url: '/login',
@@ -86,7 +85,7 @@ angular.module('superio', [
         }
       });
 
-    // if none of the above states are matched, use this as the fallback
+    // If none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/shoppinglist');
 
   });
