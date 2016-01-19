@@ -6,4 +6,8 @@ angular.module('superio')
     this.get = function () {
       return $http.get(settings.apiUrl + baseEndpoint);
     }
+
+    this.delete = function (id) {
+      return $http.delete(settings.apiUrl + baseEndpoint + '/' + id);
+    }
   });
