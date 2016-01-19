@@ -1,0 +1,24 @@
+<ion-view view-title="Product toevoegen">
+  <ion-content class="padding">
+    <div class="bar bar-header item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" ng-model="data.query" placeholder="Zoeken">
+      </label>
+      <button class="button button-clear" ng-click="back()">
+        Terug
+      </button>
+    </div>
+
+    <ion-list ng-show="results" style="margin-top: 4px">
+
+      <ion-radio ng-repeat="result in results" ng-model="selected.id" ng-value="result.id">{{result.title}} <span
+        class="text-muted">{{result.price | currency: '€ '}}</span></ion-radio>
+
+    </ion-list>
+  </ion-content>
+</ion-view>
+
+<ion-tabs class="tabs-icon-top tabs-color-active-positive" ng-click="addProduct()">
+  <button class="button button-positive button-small">Toevoegen</button>
+</ion-tabs>
