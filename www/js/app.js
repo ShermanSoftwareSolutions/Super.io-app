@@ -38,24 +38,16 @@ angular.module('superio', [
     $authProvider.signupUrl = '/user/signup';
 
     $stateProvider
-
-      // setup an abstract state for the tabs directive
-      .state('tab', {
-        url: '/tab',
-        abstract: true,
-        templateUrl: 'templates/tabs.html'
+      .state('login', {
+        url: '/login',
+        templateUrl: 'templates/login.html',
+        controller: 'LoginCtrl'
       })
 
-      // Each tab has its own nav history stack:
-
-      .state('tab.dash', {
-        url: '/dash',
-        views: {
-          'tab-dash': {
-            templateUrl: 'templates/tab-dash.html',
-            controller: 'DashCtrl'
-          }
-        },
+      .state('shoppinglist', {
+        url: '/shoppinglist',
+        templateUrl: 'templates/shoppinglist.html',
+        controller: 'ShoppinglistCtrl',
         resolve: {
           authenticated: ['$location', '$auth', function ($location, $auth) {
             if (!$auth.isAuthenticated()) {
@@ -65,13 +57,7 @@ angular.module('superio', [
         }
       })
 
-      .state('login', {
-        url: '/login',
-        templateUrl: 'templates/login.html',
-        controller: 'LoginCtrl'
-      })
-
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/shoppinglist');
 
   });

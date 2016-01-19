@@ -1,6 +1,6 @@
 <ion-view view-title="Login">
   <ion-content class="padding">
-    <div class="list">
+    <div class="list login-form">
       <form role="form" name="loginForm" ng-submit="login(loginForm)" novalidate>
         <label class="item item-input" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
           <span class="input-label">Email</span>
@@ -11,7 +11,7 @@
           <input name="password" type="password" ng-model="loginData.password" required />
         </label>
 
-        <button type="submit" class="button button-positive login-button">Inloggen</button>
+        <button type="submit" class="button button-positive login-button button-full" ng-disabled="loginForm.$invalid">Inloggen</button>
       </form>
     </div>
   </ion-content>

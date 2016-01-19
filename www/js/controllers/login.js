@@ -21,7 +21,7 @@ angular.module('superio')
           // Disable the back button
           $ionicHistory.currentView($ionicHistory.backView());
 
-          $state.go('tab.dash', {location: 'replace'});
+          $state.go('tab.shoppinglist', {location: 'replace'});
         })
         .catch(function () {
           $cordovaToast
