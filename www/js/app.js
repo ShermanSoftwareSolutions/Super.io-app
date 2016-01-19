@@ -31,11 +31,13 @@ angular.module('superio', [
     apiUrl: 'http://localhost:1337'
   })
 
-  .config(function ($stateProvider, $urlRouterProvider, $authProvider, settings) {
+  .config(function ($stateProvider, $urlRouterProvider, $authProvider, settings, $ionicConfigProvider) {
 
     $authProvider.baseUrl = settings.apiUrl;
     $authProvider.loginUrl = '/user/login';
     $authProvider.signupUrl = '/user/signup';
+
+    $ionicConfigProvider.tabs.position('bottom');
 
     $stateProvider
       .state('login', {

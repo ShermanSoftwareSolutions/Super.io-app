@@ -22,3 +22,7 @@ input.ng-invalid {
   font-size: 12px;
   color: #333;
 }
+
+.button-new {
+  font-size: 14px;
+}

@@ -42,5 +42,4 @@ angular.module('superio')
     };
 
     $scope.getItems();
-
   });
