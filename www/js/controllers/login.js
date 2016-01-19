@@ -28,7 +28,7 @@ angular.module('superio')
           $ionicHistory.currentView($ionicHistory.backView());
 
           // Go to the shoppinglist overview
-          $state.go('tab.shoppinglist', {location: 'replace'});
+          $state.go('shoppinglist', {location: 'replace'});
         })
         .catch(function () {
           // Show a toast error message
