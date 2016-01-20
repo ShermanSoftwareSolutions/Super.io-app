@@ -1,9 +1,8 @@
 angular.module('superio')
 
-  .controller('ShoppingcartCtrl', function ($scope, ShoppingcartService, $stateParams, $cordovaBarcodeScanner) {
+  .controller('ShoppingcartCtrl', function ($scope, ShoppingcartService, $stateParams, $cordovaToast, $cordovaBarcodeScanner) {
 
     $scope.cart = [];
-    $scope.scannedInfo = '';
 
     /**
      * Scans the product using cordovaBarcodeScanner and add it to the shoppingcart
@@ -21,18 +20,21 @@ angular.module('superio')
 
             ShoppingcartService
               .scan(product)
-              .success(function (line) {
-                console.log(JSON.stringify(line));
-                // Push the new product into the cart or reload?
-                $scope.cart.lines.push(line);
+              .success(function () {
+                $scope.refreshCart();
               })
               .error(function (err) {
-                console.log(JSON.stringify(err));
+                // Show a toast error message
+                $cordovaToast
+                  .showLongBottom('Product niet gevonden, probeer het opnieuw')
+                  .then(function () {
+                    console.log('Toast launched!');
+                  }, function (err) {
+                    console.log('Couldn\'t make a toast!');
+                  });
                 console.log('Adding scanned product errored');
               });
-          }, function (error) {
-            // An error occurred
-            console.log(error);
+          }, function () {
             console.log('Scanning product failed');
           });
       });
@@ -92,17 +94,19 @@ angular.module('superio')
       }
     };
 
-    ShoppingcartService
-      .find($stateParams.id)
-      .success(function (cart) {
-        console.log(cart);
-        $scope.cart = cart;
+    $scope.refreshCart = function () {
+      ShoppingcartService
+        .find($stateParams.id)
+        .success(function (cart) {
+          $scope.cart = cart;
 
-        // Recalculate total price
-        $scope.calculateTotalPrice();
-      })
-      .error(function () {
-        console.log('Fetching the cart didnt work');
-      })
+          // Recalculate total price
+          $scope.calculateTotalPrice();
+        })
+        .error(function () {
+          console.log('Fetching the cart didnt work');
+        });
+    };
 
+    $scope.refreshCart();
   });

@@ -1,23 +1,23 @@
 <ion-view view-title="Winkelwagen">
   <ion-content>
-    {{cart}}
     <ul class="list">
       <li ng-repeat="line in cart.lines" class="item item-button-right">
         {{line.product.title}} <span class="text-muted">{{line.product.price * line.amount | currency: '€ '}}</span>
 
-        <div class="button button-positive" ng-click="changeAmount(line, $id, true)">
+        <div ng-show="line.scanned" class="button button-positive" ng-click="changeAmount(line, $id, true)">
           <i class="icon ion-plus"></i>
         </div>
-        <div class="button button-positive" ng-click="changeAmount(line, $id, false)" style="margin-right: 45px;">
+        <div ng-show="line.scanned" class="button button-positive" ng-click="changeAmount(line, $id, false)"
+             style="margin-right: 45px;">
           <i ng-if="line.amount > 1" class="icon ion-minus"></i>
           <i ng-if="line.amount <= 1" class="icon ion-trash-a"></i>
         </div>
+        <div ng-show="!line.scanned" class="button button-positive button-small text-muted">Nog niet gescant</div>
         <span class="item-note">
           {{line.amount}}x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </span>
       </li>
     </ul>
-    Gescant: {{scannedInfo}}
   </ion-content>
 </ion-view>
 
