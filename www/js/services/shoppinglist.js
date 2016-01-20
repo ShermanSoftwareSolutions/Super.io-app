@@ -47,6 +47,7 @@ angular.module('superio')
 
     /**
      * PUT request to change the amount of a product in a shoppinglist
+     *
      * @param list
      * @returns {HttpPromise}
      */

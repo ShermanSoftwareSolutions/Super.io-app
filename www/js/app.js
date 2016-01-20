@@ -25,7 +25,7 @@ angular.module('superio', [
 
   .constant('settings', {
     // The url of the Sails backend
-    apiUrl: 'http://192.168.2.6:1337'
+    apiUrl: 'http://145.37.44.47:1337'
   })
 
   .config(function ($stateProvider, $urlRouterProvider, $authProvider, settings, $ionicConfigProvider) {
@@ -49,6 +49,19 @@ angular.module('superio', [
         url: '/shoppinglist',
         templateUrl: 'templates/shoppinglist.html',
         controller: 'ShoppinglistCtrl',
+        resolve: {
+          authenticated: ['$location', '$auth', function ($location, $auth) {
+            if (!$auth.isAuthenticated()) {
+              return $location.path('/login');
+            }
+          }]
+        }
+      })
+
+      .state('shoppingcart', {
+        url: '/shoppingcart/:id',
+        templateUrl: 'templates/shoppingcart.html',
+        controller: 'ShoppingcartCtrl',
         resolve: {
           authenticated: ['$location', '$auth', function ($location, $auth) {
             if (!$auth.isAuthenticated()) {

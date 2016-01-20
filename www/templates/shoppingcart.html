@@ -1,7 +1,8 @@
-<ion-view view-title="{{list.title || 'Boodschappenlijst'}}">
+<ion-view view-title="Winkelwagen">
   <ion-content>
+    {{cart}}
     <ul class="list">
-      <li ng-repeat="line in list.lines" class="item item-button-right">
+      <li ng-repeat="line in cart.lines" class="item item-button-right">
         {{line.product.title}} <span class="text-muted">{{line.product.price * line.amount | currency: '€ '}}</span>
 
         <div class="button button-positive" ng-click="changeAmount(line, $id, true)">
@@ -16,13 +17,14 @@
         </span>
       </li>
     </ul>
+    Gescant: {{scannedInfo}}
   </ion-content>
 </ion-view>
 
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
-  <p class="total-price">Totaal: {{list.totalPrice | currency: '€ '}}</p>
+  <p class="total-price">Totaal: {{cart.totalPrice | currency: '€ '}}</p>
   &nbsp;&nbsp;&nbsp;
-  <button class="button button-positive button-small" ui-sref="new-product({shoppinglistId: list.id})">Nieuw product</button>
+  <button class="button button-positive button-small" ng-click="scanProduct()">Scan</button>
   &nbsp;&nbsp;&nbsp;
-  <button class="button button-positive button-small" ng-click="goToCart()">Winkelen</button>
+  <button class="button button-positive button-small" ng-click="goToCart()">Afrekenen</button>
 </ion-tabs>

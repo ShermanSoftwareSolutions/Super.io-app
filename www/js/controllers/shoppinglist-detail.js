@@ -3,25 +3,10 @@
  */
 angular.module('superio')
 
-  .controller('ShoppinglistDetailCtrl', function ($scope, ShoppinglistService, $stateParams, $cordovaBarcodeScanner) {
+  .controller('ShoppinglistDetailCtrl', function ($scope, ShoppinglistService, ShoppingcartService, $state, $stateParams) {
     $scope.list = [];
-    $scope.scannedInfo = '';
 
-    $scope.testScanner = function () {
-      document.addEventListener("deviceready", function () {
-
-        $cordovaBarcodeScanner
-          .scan()
-          .then(function (barcodeData) {
-            $scope.scannedInfo = barcodeData.text;
-          }, function (error) {
-            // An error occurred
-          });
-
-      })
-    }
-
-      /**
+    /**
      * Changes the amount that a product has in a shoppinglist
      *
      * @param product
@@ -47,10 +32,10 @@ angular.module('superio')
 
       ShoppinglistService
         .changeAmount(list)
-        .success(function (res) {
+        .success(function () {
           console.log('Changed the product amount');
         })
-        .error(function (err) {
+        .error(function () {
           console.log('Changing amount went wrong');
         })
     };
@@ -73,6 +58,29 @@ angular.module('superio')
           $scope.list.totalPrice += item.product.price * item.amount;
         });
       }
+    };
+
+    /**
+     * Redirects the user to the shoppingcart
+     */
+    $scope.goToCart = function () {
+      var cart = {
+        shoppinglistId: $stateParams.id
+      };
+
+      // Maybe retrieve the cart from localStorage or DB and resume that list?
+
+      ShoppingcartService
+        .create(cart)
+        .success(function (newCart) {
+          console.log(newCart);
+
+          // Go to the shoppingcart
+          $state.go('shoppingcart', {id: newCart.id});
+        })
+        .error(function (err) {
+          console.log('Going to cart went wrong');
+        })
     };
 
     ShoppinglistService
