@@ -3,7 +3,7 @@
  */
 angular.module('superio')
 
-  .controller('ShoppinglistCtrl', function ($scope, ShoppinglistService) {
+  .controller('ShoppinglistCtrl', function ($scope, ShoppinglistService, $cordovaToast) {
     // Initializes the lists
     $scope.lists = [];
 

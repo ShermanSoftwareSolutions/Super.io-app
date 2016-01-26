@@ -35,10 +35,19 @@ angular.module('superio')
           $state.go('shoppinglist', {location: 'replace'});
         })
         .catch(function (err) {
-          console.log(err);
+          var error = 'Verkeerde gegevens';
+
+          // Hacky custom error messages
+          if (err.data == 'Email is already taken')
+            error = 'Email is al in gebruik, probeer een andere.';
+          if (err.data == 'Passwords no not match')
+            error = 'De twee wachtwoorden komen niet overeen.';
+
+          console.log(error);
+
           // Show a toast error message
           $cordovaToast
-            .showLongBottom('Verkeerde gegevens')
+            .showLongBottom(error)
             .then(function () {
               console.log('Toast launched!');
             }, function (err) {

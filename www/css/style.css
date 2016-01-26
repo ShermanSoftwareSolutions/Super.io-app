@@ -35,3 +35,17 @@ input.ng-invalid {
 .font-invoice {
   font-size: 16px;
 }
+
+.img-center {
+  display:block;
+  margin:auto;
+}
+
+.ion-lg {
+  font-size: 200px;
+}
+
+.font-check {
+  font-size: 20px;
+  font-weight: bold;
+}
