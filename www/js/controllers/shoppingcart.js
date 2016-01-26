@@ -1,6 +1,6 @@
 angular.module('superio')
 
-  .controller('ShoppingcartCtrl', function ($scope, ShoppingcartService, $stateParams, $cordovaToast, $cordovaBarcodeScanner) {
+  .controller('ShoppingcartCtrl', function ($scope, ShoppingcartService, $stateParams, $state, $cordovaToast, $cordovaBarcodeScanner) {
 
     $scope.cart = [];
 
@@ -89,9 +89,14 @@ angular.module('superio')
       if ($scope.cart.lines != [] && $scope.cart.lines != undefined) {
         // Loop over the products and add it to the total price
         $scope.cart.lines.map(function (item) {
-          $scope.cart.totalPrice += item.product.price * item.amount;
+          if (item.scanned)
+            $scope.cart.totalPrice += item.product.price * item.amount;
         });
       }
+    };
+
+    $scope.goToInvoice = function () {
+      $state.go('invoice', {shoppingcartId: $stateParams.id});
     };
 
     $scope.refreshCart = function () {

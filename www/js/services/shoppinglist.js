@@ -36,6 +36,16 @@ angular.module('superio')
     };
 
     /**
+     * POST request to create a new shoppinglist
+     *
+     * @param shoppinglist
+     * @returns {HttpPromise}
+     */
+    this.create = function (shoppinglist) {
+      return $http.post(settings.apiUrl + baseEndpoint, shoppinglist);
+    };
+
+    /**
      * PUT request to add a product to a shoppinglist
      *
      * @param list
