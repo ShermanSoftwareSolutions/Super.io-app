@@ -23,20 +23,23 @@ angular.module('superio')
             ProductService
               .get(product.productId)
               .success(function (scannedProduct) {
-                var incremented = false;
-                // Check if the product is not already in the list
-                $scope.scannedProducts.map(function (item) {
-                  console.log(JSON.stringify(item));
-                  // If it's on the list, increment the amount
-                  if (item.id == product.productId) {
-                    item.amount += 1;
-                    incremented = true;
-                  }
-                });
+                // Check implemented because the success returns an empty string instead of an error
+                if (scannedProduct != '') {
+                  var incremented = false;
+                  // Check if the product is not already in the list
+                  $scope.scannedProducts.map(function (item) {
+                    console.log(JSON.stringify(item));
+                    // If it's on the list, increment the amount
+                    if (item.id == product.productId) {
+                      item.amount += 1;
+                      incremented = true;
+                    }
+                  });
 
-                if (!incremented) {
-                  scannedProduct.amount = 1;
-                  $scope.scannedProducts.push(scannedProduct);
+                  if (!incremented) {
+                    scannedProduct.amount = 1;
+                    $scope.scannedProducts.push(scannedProduct);
+                  }
                 }
               })
               .error(function () {
