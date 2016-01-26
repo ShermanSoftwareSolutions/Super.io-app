@@ -27,3 +27,11 @@ input.ng-invalid {
   font-weight: bold;
   font-size: 18px;
 }
+
+.text-center {
+  text-align: center;
+}
+
+.font-invoice {
+  font-size: 16px;
+}

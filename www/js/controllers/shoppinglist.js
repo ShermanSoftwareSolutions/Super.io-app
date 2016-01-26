@@ -37,6 +37,22 @@ angular.module('superio')
         });
     };
 
+    $scope.createList = function () {
+      var shoppinglist = {
+        title: new Date().toJSON().slice(0,10)
+      };
+
+      ShoppinglistService
+        .create(shoppinglist)
+        .success(function () {
+          $scope.getItems();
+        })
+        .error(function (err) {
+          console.log(err);
+          console.log('Something went wrong');
+        });
+    };
+
     /**
      * Fetches the shoppinglists for this user
      */

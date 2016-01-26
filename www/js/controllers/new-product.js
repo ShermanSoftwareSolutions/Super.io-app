@@ -30,7 +30,8 @@ angular.module('superio')
     $scope.addProduct = function () {
       var list = {
         shoppinglistId: $stateParams.shoppinglistId,
-        productId: $scope.selected.id
+        productId: $scope.selected.id,
+        amount: 1
       };
 
       ShoppinglistService
@@ -39,6 +40,7 @@ angular.module('superio')
           console.log(resp);
         })
         .error(function (err) {
+          console.log(err);
           console.log('Adding product went wrong');
         })
         .finally(function () {
