@@ -1,17 +1,27 @@
 <ion-view view-title="Controleren">
   <ion-content>
-    <a class="item" ng-repeat="product in scannedProducts">
+    <div ng-if="scannedProducts.length == 0">
+      <p class="padding">Er zijn nog geen producten gescand!</p>
+    </div>
+    <a class="item item-button-right" ng-repeat="product in scannedProducts">
       {{product.title}}
-      <span class="item-note">
-        {{product.amount}}
-      </span>
+
+      <div class="button button-positive" ng-click="changeAmount(product, $id, true)">
+        <i class="icon ion-plus"></i>
+      </div>
+      <div class="button button-positive" ng-click="changeAmount(product, $id, false)" style="margin-right: 45px;">
+        <i ng-if="product.amount > 1" class="icon ion-minus"></i>
+        <i ng-if="product.amount <= 1" class="icon ion-trash-a"></i>
+      </div>
+        <span class="item-note">
+          {{product.amount}}x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
     </a>
-    {{scannedProducts}}
   </ion-content>
 </ion-view>
 
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
-  <button class="button button-positive button-small" ng-click="scanProduct()">Scan</button>
+  <button class="button button-positive button-small" ng-click="scanProduct()"><i class="ion-qr-scanner"></i> Scan</button>
   &nbsp;&nbsp;&nbsp;
-  <button class="button button-positive button-small" ng-click="checkList()">Controleren</button>
+  <button class="button button-positive button-small" ng-click="checkList()"><i class="ion-refresh"></i> Controleren</button>
 </ion-tabs>

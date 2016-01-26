@@ -26,4 +26,14 @@ angular.module('superio')
       return $http.get(settings.apiUrl + baseEndpoint + '/' + invoiceId);
     };
 
+    /**
+     * GET request to check if the invoice exists
+     *
+     * @param invoiceId
+     * @returns {HttpPromise}
+     */
+    this.find = function (invoiceId) {
+      return $http.get(settings.apiUrl + baseEndpoint + '/detail/' + invoiceId);
+    }
+
   });

@@ -22,7 +22,7 @@
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
   <p class="total-price">Totaal: {{list.totalPrice | currency: '€ '}}</p>
   &nbsp;&nbsp;&nbsp;
-  <button class="button button-positive button-small" ui-sref="new-product({shoppinglistId: list.id})">Nieuw product</button>
+  <button class="button button-positive button-small" ui-sref="new-product({shoppinglistId: list.id})"><i class="ion-plus"></i> Nieuw product</button>
   &nbsp;&nbsp;&nbsp;
-  <button class="button button-positive button-small" ng-click="goToCart()">Winkelen</button>
+  <button class="button button-positive button-small" ng-click="goToCart()"><i class="ion-bag"></i> Winkelen</button>
 </ion-tabs>

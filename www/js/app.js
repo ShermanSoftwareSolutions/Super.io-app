@@ -64,8 +64,20 @@ angular.module('superio', [
         }
       })
 
-      .state('check', {
+      .state('check-scanner', {
         url: '/check',
+        controller: 'CheckScannerCtrl',
+        resolve: {
+          authenticated: ['$location', '$auth', function ($location, $auth) {
+            if (!$auth.isAuthenticated()) {
+              return $location.path('/login');
+            }
+          }]
+        }
+      })
+
+      .state('check', {
+        url: '/check/:invoiceId',
         templateUrl: 'templates/check.html',
         controller: 'CheckCtrl',
         resolve: {
