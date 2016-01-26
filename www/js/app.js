@@ -61,7 +61,8 @@ angular.module('superio', [
               return $location.path('/login');
             }
           }]
-        }
+        },
+        cache: false
       })
 
       .state('check-scanner', {

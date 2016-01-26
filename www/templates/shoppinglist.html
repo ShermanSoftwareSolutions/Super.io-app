@@ -5,6 +5,9 @@
     </ion-refresher>
 
     <ion-list>
+      <div ng-if="lists.length == 0" class="padding">
+        <p>Er zijn (nog) geen boodschappenlijstjes</p>
+      </div>
 
       <ion-item show-delete="true" ng-repeat="item in lists | orderBy: 'createdAt'"
                 item="item"

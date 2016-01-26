@@ -84,13 +84,13 @@ angular.module('superio')
       var products = [];
       $scope.scannedProducts.map(function (item) {
         products.push({
-          id: item.id,
+          productId: item.id,
           amount: item.amount
         });
       });
 
       var list = {
-        cartId: $stateParams.cartId,
+        shoppingcartId: $stateParams.cartId,
         products: products
       };
 

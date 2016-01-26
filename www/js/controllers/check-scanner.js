@@ -16,26 +16,31 @@ angular.module('superio')
             invoiceId: barcodeData.text
           };
 
-          // Check if the invoice exists
-          InvoiceService
-            .find(invoice.invoiceId)
-            .success(function (invoice) {
-              // Redirect to checking page
-              $state.go('check', {cartId: invoice.shoppingcartId});
-            })
-            .error(function (err) {
-              $state.go('shoppinglist', {location: 'replace'});
-              console.log(err);
-              // Show a toast error message
-              $cordovaToast
-                .showLongBottom('Bon niet gevonden, probeer het opnieuw')
-                .then(function () {
-                  console.log('Toast launched!');
-                }, function (err) {
-                  console.log('Couldn\'t make a toast!');
-                });
-            })
+          if (invoice.invoiceId != '') {
+            // Check if the invoice exists
+            InvoiceService
+              .find(invoice.invoiceId)
+              .success(function (invoice) {
+                // Redirect to checking page
+                $state.go('check', {cartId: invoice.shoppingcartId});
+              })
+              .error(function (err) {
+                $state.go('shoppinglist', {location: 'replace'});
+                console.log(err);
+                // Show a toast error message
+                $cordovaToast
+                  .showLongBottom('Bon niet gevonden, probeer het opnieuw')
+                  .then(function () {
+                    console.log('Toast launched!');
+                  }, function (err) {
+                    console.log('Couldn\'t make a toast!');
+                  });
+              })
+          } else {
+            $state.go('shoppinglist', {location: 'replace'});
+          }
         }, function () {
+          $state.go('shoppinglist', {location: 'replace'});
           console.log('Scanning product failed');
         });
     });
