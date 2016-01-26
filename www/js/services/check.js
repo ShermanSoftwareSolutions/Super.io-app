@@ -13,7 +13,7 @@ angular.module('superio')
      * @returns {HttpPromise}
      */
     this.check = function (check) {
-      return $http.post(settings.apiUrl + baseEndpoint + '/' + check);
+      return $http.post(settings.apiUrl + baseEndpoint, check);
     };
 
   });

@@ -28,7 +28,6 @@ angular.module('superio')
                   var incremented = false;
                   // Check if the product is not already in the list
                   $scope.scannedProducts.map(function (item) {
-                    console.log(JSON.stringify(item));
                     // If it's on the list, increment the amount
                     if (item.id == product.productId) {
                       item.amount += 1;
@@ -77,15 +76,50 @@ angular.module('superio')
         $scope.scannedProducts.splice($scope.scannedProducts.indexOf(product), 1);
     };
 
+    /**
+     * Creates a list from the scanned items and check them at the backend side
+     */
     $scope.checkList = function () {
-      console.log('Check the list');
+      // Create the necessary objects for the backend
+      var products = [];
+      $scope.scannedProducts.map(function (item) {
+        products.push({
+          id: item.id,
+          amount: item.amount
+        });
+      });
+
+      var list = {
+        cartId: $stateParams.cartId,
+        products: products
+      };
+
       // Send the products list and cart ID to the backend
-
-      // Success will mean that the cart is OK
-
-      // Error means that the cart doesnt match the contents, so something is wrong
-
-      // Show the user an error message
+      CheckService
+        .check(list)
+        // Success will mean that the cart is OK
+        .success(function () {
+          // Show a toast error message
+          $cordovaToast
+            .showLongBottom('Winkelwagen heeft de juiste inhoud!')
+            .then(function () {
+              console.log('Toast launched!');
+            }, function (err) {
+              console.log('Couldn\'t make a toast!');
+            });
+        })
+        // Error means that the cart doesnt match the contents, so something is wrong
+        .error(function (err) {
+          console.log(err);
+          // Show a toast error message
+          $cordovaToast
+            .showLongBottom('Winkelwagen heeft niet de juiste inhoud!')
+            .then(function () {
+              console.log('Toast launched!');
+            }, function (err) {
+              console.log('Couldn\'t make a toast!');
+            });
+        });
     };
   })
 ;

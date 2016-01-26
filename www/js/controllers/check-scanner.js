@@ -19,9 +19,9 @@ angular.module('superio')
           // Check if the invoice exists
           InvoiceService
             .find(invoice.invoiceId)
-            .success(function () {
+            .success(function (invoice) {
               // Redirect to checking page
-              $state.go('check', {invoiceId: invoice.invoiceId});
+              $state.go('check', {cartId: invoice.shoppingcartId});
             })
             .error(function (err) {
               $state.go('shoppinglist', {location: 'replace'});

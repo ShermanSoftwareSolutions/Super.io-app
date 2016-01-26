@@ -77,7 +77,7 @@ angular.module('superio', [
       })
 
       .state('check', {
-        url: '/check/:invoiceId',
+        url: '/check/:cartId',
         templateUrl: 'templates/check.html',
         controller: 'CheckCtrl',
         resolve: {
