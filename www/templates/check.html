@@ -1,0 +1,17 @@
+<ion-view view-title="Controleren">
+  <ion-content>
+    <a class="item" ng-repeat="product in scannedProducts">
+      {{product.title}}
+      <span class="item-note">
+        {{product.amount}}
+      </span>
+    </a>
+    {{scannedProducts}}
+  </ion-content>
+</ion-view>
+
+<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+  <button class="button button-positive button-small" ng-click="scanProduct()">Scan</button>
+  &nbsp;&nbsp;&nbsp;
+  <button class="button button-positive button-small" ng-click="checkList()">Controleren</button>
+</ion-tabs>

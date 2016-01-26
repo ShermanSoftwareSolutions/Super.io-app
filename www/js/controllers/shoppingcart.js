@@ -96,7 +96,18 @@ angular.module('superio')
     };
 
     $scope.goToInvoice = function () {
-      $state.go('invoice', {shoppingcartId: $stateParams.id});
+      if ($scope.cart.totalPrice != 0) {
+        $state.go('invoice', {shoppingcartId: $stateParams.id});
+      } else {
+        // Show a toast error message
+        $cordovaToast
+          .showLongBottom('Je hebt nog geen producten gescand')
+          .then(function () {
+            console.log('Toast launched!');
+          }, function (err) {
+            console.log('Couldn\'t make a toast!');
+          });
+      }
     };
 
     $scope.refreshCart = function () {

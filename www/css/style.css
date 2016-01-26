@@ -35,3 +35,8 @@ input.ng-invalid {
 .font-invoice {
   font-size: 16px;
 }
+
+.img-center {
+  display:block;
+  margin:auto;
+}

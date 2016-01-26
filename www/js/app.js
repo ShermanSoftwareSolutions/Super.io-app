@@ -64,6 +64,19 @@ angular.module('superio', [
         }
       })
 
+      .state('check', {
+        url: '/check',
+        templateUrl: 'templates/check.html',
+        controller: 'CheckCtrl',
+        resolve: {
+          authenticated: ['$location', '$auth', function ($location, $auth) {
+            if (!$auth.isAuthenticated()) {
+              return $location.path('/login');
+            }
+          }]
+        }
+      })
+
       .state('shoppingcart', {
         url: '/shoppingcart/:id',
         templateUrl: 'templates/shoppingcart.html',
