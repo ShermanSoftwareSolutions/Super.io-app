@@ -1,26 +1,51 @@
 <ion-view view-title="Controleren">
   <ion-content>
-    <div ng-if="scannedProducts.length == 0">
-      <p class="padding">Er zijn nog geen producten gescand!</p>
-    </div>
-    <a class="item item-button-right" ng-repeat="product in scannedProducts">
-      {{product.title}}
+    <div ng-show="result">
+      <div ng-if="contentsOk" class="font-check text-center">
+        <i class="ion-checkmark-round ion-lg" style="color: #387ef5"></i><br /><br />
+        Inhoud is OK!
+      </div>
 
-      <div class="button button-positive" ng-click="changeAmount(product, $id, true)">
-        <i class="icon ion-plus"></i>
+      <div ng-if="!contentsOk">
+        <div class="font-check text-center">
+          <i class="ion-close-round ion-lg" style="color: #cc2c00"></i><br /><br />
+          Inhoud is FOUT!
+        </div>
+        <br />
+        <div class="list">
+          <a class="item" ng-repeat="product in contents">
+            {{product.title}}
+            <span class="item-note">
+              <b>{{product.amount}}</b>
+            </span>
+          </a>
+        </div>
       </div>
-      <div class="button button-positive" ng-click="changeAmount(product, $id, false)" style="margin-right: 45px;">
-        <i ng-if="product.amount > 1" class="icon ion-minus"></i>
-        <i ng-if="product.amount <= 1" class="icon ion-trash-a"></i>
+    </div>
+
+    <div ng-show="!result">
+      <div ng-if="scannedProducts.length == 0">
+        <p class="padding">Er zijn nog geen producten gescand!</p>
       </div>
-        <span class="item-note">
-          {{product.amount}}x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </span>
-    </a>
+      <a class="item item-button-right" ng-repeat="product in scannedProducts">
+        {{product.title}}
+
+        <div class="button button-positive" ng-click="changeAmount(product, $id, true)">
+          <i class="icon ion-plus"></i>
+        </div>
+        <div class="button button-positive" ng-click="changeAmount(product, $id, false)" style="margin-right: 45px;">
+          <i ng-if="product.amount > 1" class="icon ion-minus"></i>
+          <i ng-if="product.amount <= 1" class="icon ion-trash-a"></i>
+        </div>
+          <span class="item-note">
+            {{product.amount}}x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </span>
+      </a>
+    </div>
   </ion-content>
 </ion-view>
 
-<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+<ion-tabs class="tabs-icon-top tabs-color-active-positive" ng-show="!result">
   <button class="button button-positive button-small" ng-click="scanProduct()"><i class="ion-qr-scanner"></i> Scan</button>
   &nbsp;&nbsp;&nbsp;
   <button class="button button-positive button-small" ng-click="checkList()"><i class="ion-refresh"></i> Controleren</button>

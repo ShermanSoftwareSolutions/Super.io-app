@@ -5,6 +5,7 @@ angular.module('superio')
 
   .controller('CheckCtrl', function ($scope, CheckService, ProductService, $cordovaBarcodeScanner, $stateParams, $cordovaToast) {
     $scope.scannedProducts = [];
+    $scope.result = false;
 
     /**
      * Scans a product and adds it to the list of scanned products
@@ -98,15 +99,23 @@ angular.module('superio')
       CheckService
         .check(list)
         // Success will mean that the cart is OK
-        .success(function () {
-          // Show a toast error message
-          $cordovaToast
-            .showLongBottom('Winkelwagen heeft de juiste inhoud!')
-            .then(function () {
-              console.log('Toast launched!');
-            }, function (err) {
-              console.log('Couldn\'t make a toast!');
-            });
+        .success(function (contents) {
+          $scope.result = true;
+
+          if (contents == '') {
+            $scope.contentsOk = true;
+          } else {
+            $scope.contents = contents.products;
+            $scope.contentsOk = false;
+
+            for (var i = 0; i < $scope.contents.length; i++ ) {
+              if ($scope.contents[i].amount < 0) {
+                $scope.contents[i].amount = Math.abs($scope.contents[i].amount) + ' te veel gescand';
+              } else {
+                $scope.contents[i].amount = $scope.contents[i].amount + ' te weinig gescand';
+              }
+            };
+          }
         })
         // Error means that the cart doesnt match the contents, so something is wrong
         .error(function (err) {

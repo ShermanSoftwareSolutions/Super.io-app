@@ -40,3 +40,12 @@ input.ng-invalid {
   display:block;
   margin:auto;
 }
+
+.ion-lg {
+  font-size: 200px;
+}
+
+.font-check {
+  font-size: 20px;
+  font-weight: bold;
+}
