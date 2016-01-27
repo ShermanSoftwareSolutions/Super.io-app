@@ -1,0 +1,31 @@
+<ion-view view-title="Registreren">
+  <ion-content class="padding">
+    <div class="list login-form">
+      <form role="form" name="signupForm" ng-submit="signup(signupForm)" novalidate>
+        <label class="item item-input" ng-class="{ 'has-error' : signupForm.firstName.$invalid && !signupForm.firstName.$pristine }">
+          <span class="input-label">Voornaam</span>
+          <input name="firstName" type="text" ng-model="signupData.firstName" required autofocus />
+        </label>
+        <label class="item item-input" ng-class="{ 'has-error' : signupForm.lastName.$invalid && !signupForm.lastName.$pristine }">
+          <span class="input-label">Achternaam</span>
+          <input name="lastName" type="text" ng-model="signupData.lastName" required autofocus />
+        </label>
+        <label class="item item-input" ng-class="{ 'has-error' : signupForm.email.$invalid && !signupForm.email.$pristine }">
+          <span class="input-label">Email</span>
+          <input name="email" type="email" ng-model="signupData.email" required autofocus />
+        </label>
+        <label class="item item-input" ng-class="{ 'has-error' : signupForm.password.$invalid && !signupForm.password.$pristine }">
+          <span class="input-label">Wachtwoord</span>
+          <input name="password" type="password" ng-model="signupData.password" required />
+        </label>
+        <label class="item item-input" ng-class="{ 'has-error' : signupForm.confirmPassword.$invalid && !signupForm.confirmPassword.$pristine }">
+          <span class="input-label">Wachtwoord<br />bevestigen</span>
+          <input name="confirmPassword" type="password" ng-model="signupData.confirmPassword" required />
+        </label>
+
+        <button type="submit" class="button button-positive login-button button-full" ng-disabled="signupForm.$invalid">Registreren</button>
+      </form>
+      <a ui-sref="login" class="text-center">Inloggen?</a>
+    </div>
+  </ion-content>
+</ion-view>
