@@ -1,0 +1,70 @@
+<ion-view view-title="Kassabon">
+  <ion-content class="padding">
+    <div class="font-invoice text-center">
+      <div class="row">
+        <div class="col"><b>Super.io</b></div>
+      </div>
+      <div class="row">
+        <div class="col">Zernikeplein 11</div>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+      <div class="col"><b>Aantal</b></div>
+      <div class="col col-50"><b>Omschrijving</b></div>
+      <div class="col"></div>
+      <div class="col"><b>Bedrag</b></div>
+    </div>
+
+    <div class="row" ng-repeat="product in invoice.products">
+      <div class="col">{{product.amount}}</div>
+      <div class="col col-50">{{product.title}}</div>
+      <div class="col">{{product.price | currency: '€'}}</div>
+      <div class="col">{{product.totalPrice | currency: '€'}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col">Aantal artikelen</div>
+      <div class="col">{{invoice.totalAmount}}</div>
+      <div class="col"></div>
+    </div>
+
+    <br />
+
+    <div class="row font-invoice">
+      <div class="col"><b>Totaal</b></div>
+      <div class="col col-50"></div>
+      <div class="col"><b>{{invoice.priceIncl | currency: '€ '}}</b></div>
+    </div>
+
+    <br />
+
+    <div class="row" ng-if="invoice.salesTax6ToPay != 0">
+      <div class="col col-50">6%</div>
+      <div class="col">{{invoice.salesTax6Excl | currency: '€ '}}</div>
+      <div class="col">{{invoice.salesTax6ToPay | currency: '€ '}}</div>
+    </div>
+
+    <div class="row" ng-if="invoice.salesTax21ToPay != 0">
+      <div class="col col-50">6%</div>
+      <div class="col">{{invoice.salesTax21Excl | currency: '€ '}}</div>
+      <div class="col">{{invoice.salesTax21ToPay | currency: '€ '}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col col-50">BTW totaal</div>
+      <div class="col"></div>
+      <div class="col">{{total.totalSalesTax | currency: '€ '}}</div>
+    </div>
+
+    <br />
+
+    <div class="font-invoice text-center">
+      Afrekenen met barcode<br />
+      <img ng-src="{{total.barcode}}" />
+    </div>
+
+  </ion-content>
+</ion-view>

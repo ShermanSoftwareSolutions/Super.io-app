@@ -1,5 +1,6 @@
 <ion-view view-title="Inloggen">
   <ion-content class="padding">
+    <img src="img/logo.png" class="img-center">
     <div class="list login-form">
       <form role="form" name="loginForm" ng-submit="login(loginForm)" novalidate>
         <label class="item item-input" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
@@ -13,6 +14,7 @@
 
         <button type="submit" class="button button-positive login-button button-full" ng-disabled="loginForm.$invalid">Inloggen</button>
       </form>
+      <a ui-sref="signup" class="text-center">Registreren?</a>
     </div>
   </ion-content>
 </ion-view>

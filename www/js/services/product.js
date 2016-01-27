@@ -25,4 +25,14 @@ angular.module('superio')
       return $http.get(settings.apiUrl + baseEndpoint + '/' + query);
     };
 
+    /**
+     * GET request to fetch a specific product with an ID
+     *
+     * @param id
+     * @returns {HttpPromise}
+     */
+    this.get = function (id) {
+      return $http.get(settings.apiUrl + baseEndpoint + '/detail/' + id);
+    }
+
   });

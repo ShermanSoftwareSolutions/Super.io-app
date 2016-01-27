@@ -3,7 +3,7 @@
  */
 angular.module('superio')
 
-  .controller('ShoppinglistCtrl', function ($scope, ShoppinglistService) {
+  .controller('ShoppinglistCtrl', function ($scope, ShoppinglistService, $cordovaToast) {
     // Initializes the lists
     $scope.lists = [];
 
@@ -34,6 +34,22 @@ angular.module('superio')
         .finally(function () {
           // Splices the deleted item from the overview
           $scope.lists.splice($scope.lists.indexOf(item), 1);
+        });
+    };
+
+    $scope.createList = function () {
+      var shoppinglist = {
+        title: new Date().toJSON().slice(0,10)
+      };
+
+      ShoppinglistService
+        .create(shoppinglist)
+        .success(function () {
+          $scope.getItems();
+        })
+        .error(function (err) {
+          console.log(err);
+          console.log('Something went wrong');
         });
     };
 

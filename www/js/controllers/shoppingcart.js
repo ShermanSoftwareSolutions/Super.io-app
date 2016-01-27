@@ -1,6 +1,6 @@
 angular.module('superio')
 
-  .controller('ShoppingcartCtrl', function ($scope, ShoppingcartService, $stateParams, $cordovaToast, $cordovaBarcodeScanner) {
+  .controller('ShoppingcartCtrl', function ($scope, ShoppingcartService, $stateParams, $state, $cordovaToast, $cordovaBarcodeScanner) {
 
     $scope.cart = [];
 
@@ -89,8 +89,24 @@ angular.module('superio')
       if ($scope.cart.lines != [] && $scope.cart.lines != undefined) {
         // Loop over the products and add it to the total price
         $scope.cart.lines.map(function (item) {
-          $scope.cart.totalPrice += item.product.price * item.amount;
+          if (item.scanned)
+            $scope.cart.totalPrice += item.product.price * item.amount;
         });
+      }
+    };
+
+    $scope.goToInvoice = function () {
+      if ($scope.cart.totalPrice != 0) {
+        $state.go('invoice', {shoppingcartId: $stateParams.id});
+      } else {
+        // Show a toast error message
+        $cordovaToast
+          .showLongBottom('Je hebt nog geen producten gescand')
+          .then(function () {
+            console.log('Toast launched!');
+          }, function (err) {
+            console.log('Couldn\'t make a toast!');
+          });
       }
     };
 

@@ -5,6 +5,9 @@
     </ion-refresher>
 
     <ion-list>
+      <div ng-if="lists.length == 0" class="padding">
+        <p>Er zijn (nog) geen boodschappenlijstjes</p>
+      </div>
 
       <ion-item show-delete="true" ng-repeat="item in lists | orderBy: 'createdAt'"
                 item="item"
@@ -22,6 +25,9 @@
 
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-  <button class="button button-positive button-small"><i class="ion-plus"></i> Nieuwe lijst</button>
+  <button class="button button-positive button-small" ng-click="createList()"><i class="ion-plus"></i> Nieuwe lijst</button>
+  &nbsp;&nbsp;&nbsp;
+  <button class="button button-positive button-small" ui-sref="check-scanner"><i class="ion-refresh"></i> Controleren</button>
+
 
 </ion-tabs>
